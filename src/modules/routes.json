@@ -1,0 +1,10 @@
+[
+    {
+        "name": "#",
+        "path": "/src/modules/login/Login.js"
+    },
+    {
+        "name": "#Wizard",
+        "path": "/src/modules/layout/Layout.js"
+    }
+]

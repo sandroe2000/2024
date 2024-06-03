@@ -1,0 +1,19 @@
+div .msg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+div .msg h1 {
+    color: red;
+}
+div .msgh {
+    color: #000;
+}
+
+div .msg  div.center{
+    width: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

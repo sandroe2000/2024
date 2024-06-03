@@ -1,0 +1,291 @@
+<div id="entity-grid">
+    <search class="d-flex justify-content-between">
+        <div class="dropdown">
+            <button type="button" id="btnEditEntity" class="btn btn-outline-light dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-plus-lg"></i> <span>Entity</span>
+            </button>
+            <div class="dropdown-menu" style="width: 325px;">
+                <form id="frmEntity" class="px-3 py-3">
+                    <div class="mb-2">
+                        <label for="frmEntity_displayName">Entity Display Name</label>
+                        <input type="text" class="form-control" id="frmEntity_displayName"
+                            data-model="frmEntity_displayName" />
+                        <input type="hidden" id="frmEntity_id" data-model="frmEntity_id" />
+                    </div>
+                    <div class="mb-2">
+                        <label for="frmEntity_name">Entity Name</label>
+                        <input type="text" class="form-control" id="frmEntity_name" data-model="frmEntity_name" />
+                    </div>
+                    <div class="mb-2">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="frmEntity_isDomain"
+                                data-model="frmEntity_isDomain" />
+                            <label class="form-check-label" for="frmEntity_isDomain">Is a Domain Entity?</label>
+                        </div>
+                    </div>
+                    <button id="entitySave" type="button" class="btn btn-primary">Save</button>
+                    <button id="entityCancel" type="button" class="btn btn-dark">Cancel</button>
+                </form>
+            </div>
+        </div>
+        <div class="entitySearchBox">
+            <i class="bi bi-search"></i>
+            <input type="search" id="btnSearchEntity" class="form-control my-2 me-2" placeholder="Search" aria-label="Search" />
+        </div>
+    </search>
+
+    <section class="px-2 py-2 scrollbar custom-scrollbar">
+        <table id="tableEntity" class="table table-hover table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col">Display Name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--tr id="17489d99-1a02-466c-802c-fc8fb7e8e981">
+                    <td>Entity 1</td>
+                    <td class="text-end">
+                        <a class="link-action me-2"><i class="bi bi-trash"></i></a>
+                        <a class="link-action me-2"><i class="bi bi-pen"></i></a>
+                        <a class="link-action me-2"><i class="bi bi-gear"></i></a>
+                        <a class="link-action"><i class="bi bi-arrow-right-square"></i></a>
+                    </td>
+                </tr-->
+            </tbody>
+        </table>
+    </section>
+
+    <div id="floatSectionMenu">
+        <button class="btn btn-sm btn-light">
+            <i class="bi bi-chevron-double-left"></i>
+        </button>
+    </div>
+
+    <header class="horiz-between">
+        <div id="btnBar">
+            <button type="button" id="btnDragDivRow" class="btn btn-outline-light" aria-label="row"
+                title="Rows are wrappers for columns">
+                <i class="bi bi-layout-sidebar-inset"></i>
+            </button>
+            <button type="button" id="btnDragDivCol" class="btn btn-outline-light" aria-label="col"
+                title="There are 12 template columns available per row">
+                <i class="bi bi-layout-three-columns"></i>
+            </button>
+            <button type="button" id="btnDragTab" class="btn btn-outline-light" aria-label="tab"
+                title="Dynamic tabbed interfaces">
+                <i class="bi bi-folder2"></i>
+            </button>
+            <button type="button" id="btnDragDropdown" class="btn btn-outline-light me-2" aria-label="dropdown"
+                title="Dropdowns are toggleable, contextual overlays for displaying lists of links">
+                <i class="bi bi-menu-button-fill"></i>
+            </button>
+
+            <button type="button" id="btnDragInputText" class="btn btn-outline-light" aria-label="text">
+                <i class="bi bi-input-cursor"></i>
+            </button>
+
+            <button type="button" id="btnDragButton" class="btn btn-outline-light" aria-label="button">
+                <i class="bi bi-app"></i>
+            </button>
+        </div>
+        <div class="pe-2 pt-2">
+            <button id="btnShowHideCode" type="button" class="btn btn-light me-4">
+                <i class="bi bi-code-slash"></i>
+            </button>
+            <button id="frmField_btnSave" type="button" class="btn btn-primary">Save</button>
+            <button id="frmField_btnCancel" type="button" class="btn btn-dark">Cancel</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="mainDrop" class="container-fluid px-3 py-3 scrollbar custom-scrollbar" style="display:none"></div>
+        <div id="mainCode" class="container-fluid" style="display:block"></div>
+    </main>
+
+    <div id="floatArticleMenu">
+        <button class="btn btn-sm btn-light">
+            <i class="bi bi-chevron-double-right"></i>
+        </button>
+    </div>
+
+    <article>
+        <nav class="px-2 py-2">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-atrributes-tab" data-bs-toggle="tab" data-bs-target="#nav-atrributes" type="button" role="tab" aria-controls="nav-atrributes" aria-selected="true"><strong>Atrributes</strong></button>
+                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><strong>Data</strong></button>
+                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><strong>Events</strong></button>
+            </div>
+        </nav>
+        <div class="tab-content scrollbar custom-scrollbar" id="entityNavTabContent">
+            <div class="tab-pane fade show active" id="nav-atrributes" role="tabpanel" aria-labelledby="nav-atrributes-tab" tabindex="0">
+                <form id="frmAttributes" class="px-3 pt-2"></form>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                <div class="px-3">...</div>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                <div class="px-3">...</div>
+            </div>
+        </div>
+    </article>
+</div>
+<style>
+    div#entity-grid {
+        display: grid;
+        gap: 1px;
+        background-color: #E2E5ED;
+        grid-template-rows: 54px calc(100vh - 115px);
+        grid-template-columns: 279px calc(100vw - 630px) 289px;
+        grid-template-areas: "search header article"
+                             "section main article";
+        overflow: hidden;
+    }
+
+    section {
+        grid-area: section;
+        background-color: #FFFFFF;
+    }
+
+    .link-action {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    search {
+        grid-area: search;
+        background-color: #FFFFFF;
+        padding-left: 7px;
+    }
+
+    header {
+        grid-area: header;
+        background-color: #FFFFFF;
+        padding-left: 7px;
+    }
+
+    main {
+        grid-area: main;
+        background-color: #F8F9FC;
+        /*overflow-y: auto;*/
+    }
+
+    article {
+        grid-area: article;
+        background-color: #FFFFFF;
+    }
+
+    search button.btn-outline-light,
+    header button.btn-outline-light {
+        position: relative;
+        --bs-btn-color: #001737;
+        --bs-btn-border-color: #E2E5ED;
+        margin-top: 8px;
+    }
+
+    .btn span {
+        font-size: 0.875rem;
+    }
+
+    .w-icons .dropdown-item {
+        padding: var(--bs-dropdown-item-padding-y) 35px;
+    }
+
+    .entitySearchBox {
+        position: relative;
+    }
+
+    .entitySearchBox i {
+        position: absolute;
+        top: 17px;
+        left: 10px;
+    }
+
+    #btnSearchEntity {
+        padding-left: 30px;
+        width: 158px;
+        height: 38px;
+    }
+
+    article h6 {
+        padding: 8px 15px 0px 15px;
+        font-weight: bold;
+        font-size: 0.875rem;
+    }
+
+    article .nav {
+        --bs-nav-link-padding-y: 0.75rem;
+    }
+
+    div#mainCode {
+        height: calc(100vh - 125px);
+        padding: 0px;
+        margin: 0px;
+    }
+
+    div#mainDrop {
+        overflow-y: auto;
+    }
+
+    div#mainDrop div.row {
+        margin-bottom: 5px;
+    }
+
+    div#mainDrop div.row,
+    div#mainDrop div[class*="col-"] {
+        position: relative;
+        min-height: 40px;
+        border: 1px dashed #999;
+        padding: 5px;
+    }
+
+    div#mainDrop span[class*="badge"] {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        opacity: 0.3;
+    }
+
+    .horiz-between {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .on-active {
+        border: 1px dashed orange !important;
+        background-color: #FFF;
+    }
+    div#entityNavTabContent {
+        height: calc(100vh - 125px);
+    }
+    #floatSectionMenu {
+        position: absolute;
+        bottom: 12px;
+        left: 60px;
+        z-index: 1054;
+    }
+    div#floatSectionMenu button.btn {
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        background-color: #E2E5ED50;
+    }
+    div#floatSectionMenu button.btn:hover {
+        background-color: #E2E5ED;
+    }
+
+    #floatArticleMenu {
+        position: absolute;
+        bottom: 12px;
+        right: 0px;
+        z-index: 1054;
+    }
+    div#floatArticleMenu button.btn {
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        background-color: #E2E5ED50;
+    }
+    div#floatArticleMenu button.btn:hover {
+        background-color: #E2E5ED;
+    }
+</style>

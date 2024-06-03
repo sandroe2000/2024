@@ -1,0 +1,212 @@
+<div id="database-grid">
+  <search class="d-flex justify-content-between">
+    <div class="dropdown">
+        <button type="button" id="btnEditEntity" class="btn btn-outline-light">
+            <i class="bi bi-plus-lg"></i> <span>Entity</span>
+        </button>
+    </div>
+    <div class="entitySearchBox">
+        <i class="bi bi-search"></i>
+        <input type="search" id="btnSearchEntity" class="form-control my-2 me-2" placeholder="Search" aria-label="Search" />
+    </div>
+  </search>
+
+  <section id="secContent"  class="px-2 py-2 scrollbar custom-scrollbar"></section>
+
+  <div id="floatSectionMenu">
+    <button class="btn btn-sm btn-light">
+      <i class="bi bi-chevron-double-left"></i>
+    </button>
+  </div>
+
+  <header class="horiz-between">
+    <div id="btnBar">
+      
+        <button type="button" id="btnDragDivRow" class="btn btn-outline-light" aria-label="row" title="Rows are wrappers for columns">
+        <i class="bi bi-diagram-3-fill"></i>
+      </button>
+
+    </div>
+    <div class="pe-2 pt-2">
+      <button id="btnShowHideCode" type="button" class="btn btn-light me-4">
+        <i class="bi bi-code-slash"></i>
+      </button>
+      <button id="frmField_btnSave" type="button" class="btn btn-primary">
+        Save
+      </button>
+      <button id="frmField_btnCancel" type="button" class="btn btn-secondary">
+        Cancel
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div id="mainCode" class="container-fluid" style="display: block" ondragover="drag_over(event)" ondrop="drop(event)"></div>
+  </main>
+
+</div>
+<style>
+  div#database-grid {
+    display: grid;
+    gap: 1px;
+    background-color: #e2e5ed;
+    grid-template-rows: 54px calc(100vh - 115px);
+    grid-template-columns: 279px calc(100vw - (54px + 279px + 8px));
+    grid-template-areas:
+      "search header"
+      "section main";
+    overflow: hidden;
+  }
+
+  section {
+    grid-area: section;
+    background-color: #ffffff;
+  }
+
+  .link-action {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  search {
+    grid-area: search;
+    background-color: #ffffff;
+    padding-left: 7px;
+  }
+
+  header {
+    grid-area: header;
+    background-color: #ffffff;
+    padding-left: 7px;
+  }
+
+  main {
+    grid-area: main;
+    background-color: #f8f9fc;
+    /*overflow-y: auto;*/
+  }
+
+  search button.btn-outline-light,
+  header button.btn-outline-light {
+    position: relative;
+    --bs-btn-color: #001737;
+    --bs-btn-border-color: #e2e5ed;
+    margin-top: 8px;
+  }
+
+  .btn span {
+    font-size: 0.875rem;
+  }
+
+  .w-icons .dropdown-item {
+    padding: var(--bs-dropdown-item-padding-y) 35px;
+  }
+
+  .entitySearchBox {
+        position: relative;
+    }
+
+    .entitySearchBox i {
+        position: absolute;
+        top: 17px;
+        left: 10px;
+    }
+
+    #btnSearchEntity {
+        padding-left: 30px;
+        width: 158px;
+        height: 38px;
+    }
+
+  article h6 {
+    padding: 8px 15px 0px 15px;
+    font-weight: bold;
+    font-size: 0.875rem;
+  }
+
+  article .nav {
+    --bs-nav-link-padding-y: 0.75rem;
+  }
+
+  div#mainCode {
+    position: relative;
+    height: calc(100vh - 125px);
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .table-card {
+    position: absolute;
+    width: 260px;
+  }
+
+  .horiz-between {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .on-active {
+    border: 1px dashed orange !important;
+    background-color: #fff;
+  }
+
+  div#databaseNavTabContent {
+    height: calc(100vh - 125px);
+  }
+
+  #floatSectionMenu {
+    position: absolute;
+    bottom: 12px;
+    left: 60px;
+    z-index: 1054;
+  }
+
+  div#floatSectionMenu button.btn {
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    background-color: #e2e5ed50;
+  }
+
+  div#floatSectionMenu button.btn:hover {
+    background-color: #e2e5ed;
+  }
+
+  #floatArticleMenu {
+    position: absolute;
+    bottom: 12px;
+    right: 0px;
+    z-index: 1054;
+  }
+
+  div#floatArticleMenu button.btn {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    background-color: #e2e5ed50;
+  }
+
+  div#floatArticleMenu button.btn:hover {
+    background-color: #e2e5ed;
+  }
+
+  .ellipsis {
+    max-width: 150px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .line{
+    border: 2px solid #D2D2D2; 
+    position:absolute; 
+    width:1px; 
+    cursor: pointer;
+    z-index: 100;
+  }
+  
+  .line-in {
+    position:absolute;
+    transform:translate(-50%,0);
+    white-space: nowrap; 
+    font-size:0.75rem;
+  }
+</style>
