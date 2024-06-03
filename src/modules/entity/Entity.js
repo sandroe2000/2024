@@ -1,15 +1,9 @@
-import { Fetch } from "/src/modules/Fetch.js";
-import { Render } from "/src/modules/Render.js";
 import { Bind } from '/src/modules/Bind.js';
 import { Attributes } from "./attributes/Attributes.js";
-import { Utils } from "/src/modules/Utils.js";
 
 export class Entity {
     
     constructor(){
-        this.fetch = new Fetch();
-        this.render = new Render();
-        this.utils = new Utils();
         this.focus = null;
         this.editor = null;
         this.entity = {
@@ -105,7 +99,7 @@ export class Entity {
 
         document.querySelector('#entitySave').addEventListener('click', (event) => {
             if(!this.entity.frmEntity_name || !this.entity.frmEntity_displayName) return false;
-            this.entity.frmEntity_id = this.utils.uuidv4();
+            this.entity.frmEntity_id = application.utils.uuidv4();
             let tr = `
                 <tr id="${this.entity.frmEntity_id}" name="${this.entity.frmEntity_name}" domain="${this.entity.frmEntity_isDomain}">
                     <td>${this.entity.frmEntity_displayName}</td>
@@ -122,7 +116,7 @@ export class Entity {
             document.querySelector(`tr[id="${this.entity.frmEntity_id}"]`).addEventListener('click', async (event) => {
                 event.preventDefault();
                 if(event.target.classList.contains('bi-gear')){
-                    await this.render.init({
+                    await application.render.init({
                         path: '/src/modules/entity/EntityConfig.js', 
                         param: event.target.closest('tr').getAttribute('id'),
                         target: '.modal',
@@ -382,7 +376,7 @@ export class Entity {
 
         if(!el.hasAttribute('aria-label')) return false;
 
-        let id = this.utils.uuidv4();
+        let id = application.utils.uuidv4();
         let str = '';
 
         switch (el.getAttribute('aria-label')) {
@@ -455,7 +449,7 @@ export class Entity {
 
     getInputText(id){
         return `
-            <label id="${this.utils.uuidv4()}" for="${id}">Text</label>
+            <label id="${application.utils.uuidv4()}" for="${id}">Text</label>
             <input type="text" id="${id}" class="form-control" />
         `;
     }

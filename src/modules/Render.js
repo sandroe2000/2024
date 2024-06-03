@@ -3,6 +3,7 @@ import { Modal } from './Modal.js';
 export class Render {
 
     constructor() {
+        this.components = [];
     }
 
     /*  
@@ -25,10 +26,14 @@ export class Render {
         let position = cls.position || 'beforeend';
         let content = '';
         let param = cls.param || null;
-
         let name = cls.path.substring((cls.path.lastIndexOf('/') + 1), cls.path.indexOf('.js'));
-        const imported = await import(cls.path);
-        const component = new imported[name](param);
+        let component = await this.getComponentByName(name);
+
+        if(!component){
+            const imported = await import(cls.path);
+            component = new imported[name](param);
+            this.components.push(component);
+        }
 
         try {
             if(!cls.notCss) await this.loadCSS(cls.path.toLowerCase().replace('.js', '.css'));
@@ -36,7 +41,7 @@ export class Render {
             console.warn('Deu ruim CSS ->', err);
         }
 
-        if(typeof component.template === 'function') {
+        if(typeof component?.template === 'function') {
             content = await component.template();
         }else{
             content = await this.loadHTML(cls.path.toLowerCase().replace('.js', '.html'));
@@ -52,7 +57,7 @@ export class Render {
             document.querySelector(target).insertAdjacentHTML(position, content);
         }
 
-        if(typeof component.events === 'function') await component.events();
+        if(typeof component?.events === 'function') await component.events();
     }
 
     async loadCSS(css) {
@@ -75,5 +80,15 @@ export class Render {
         } catch (err) {
             console.log('Deu ruim loadHTML ->', err);
         }
+    }
+
+    async getComponentByName(name){
+        
+        for(let comp in application.render.components){
+            if(application.render.components[comp].constructor.name == name){
+                return application.render.components[comp];
+            }
+        }
+        return null;
     }
 }

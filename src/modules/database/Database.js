@@ -1,10 +1,7 @@
-import { Render } from "../Render.js";
-import { Utils } from "/src/modules/Utils.js";
+
 
 export class Database {
   constructor() {
-    this.render = new Render();
-    this.utils = new Utils();
     this.totalCards = 1;
   }
 
@@ -19,7 +16,7 @@ export class Database {
         { pk: "pk_genero", content: "Gênero" },
       ],
     };
-    await this.render.init({
+    await application.render({
       path: "/src/modules/Datatable.js",
       target: "#secContent",
       param: data,
@@ -33,7 +30,7 @@ export class Database {
     this.init();
 
     document.querySelector('#btnEditEntity').addEventListener('click', async (event) => {
-      await this.render.init({
+      await application.render({
         path: "/src/modules/database/Entity.js",
         target: ".modal",
         param: {},
@@ -50,7 +47,7 @@ export class Database {
       size: 'modal-xl'
     };
 
-    await this.render.init({
+    await application.render({
       path: "/src/modules/database/Fields.js",
       target: ".modal",
       param: param,
@@ -65,7 +62,7 @@ export class Database {
       size: 'modal-sm'
     };
 
-    await this.render.init({
+    await application.render({
       path: "/src/modules/database/Entity.js",
       target: ".modal",
       param: param,
@@ -78,11 +75,11 @@ export class Database {
     let param = {
       from: event.target.closest('div[class="line"]').getAttribute('from'),
       to: event.target.closest('div[class="line"]').getAttribute('to'),
-      //size: 'modal-sm',
-      label: "Change Join"
+      size: 'modal-lg',
+      label: "Condidtion"
     };
 
-    await this.render.init({
+    await application.render({
       path: "/src/modules/database/Join.js",
       target: ".modal",
       param: param,
@@ -96,18 +93,23 @@ export class Database {
     let tableId = event.target.closest('tr').getAttribute('pk');
     let tableFk = event.target.closest('tr').getAttribute('fk');
     let tableLabel = event.target.closest('tr').querySelector('td:nth-child(1)').textContent;
-    let card = `
+    let cardStr = `
       <div id="${tableId}" fk="${tableFk}" class="card table-card">
-        <div class="card-header"></div>
+        <div class="card-header d-flex justify-content-between">
+          <div id="card-title" class="d-flex align-items-center">Pessoa</div>
+          <div>
+            <button type="button" class="btn btn-sm btn-light">
+              <i class="bi bi-link"></i>
+            </button>
+          </div>
+        </div>
         <div class="card-body">
 
           <div class="row g-0">
             <div class="col-auto me-2">
-              <input id="chk123" type="checkbox" class="form-check-inpu" />
+              <input id="chk123" type="checkbox" class="form-check-input" />
             </div>
-            <div class="col-auto me-2">
-              <i class="bi bi-key"></i>
-            </div>
+            <div class="col-auto pk-fk me-2">PK</div>
             <div class="col text-truncate" title="codigo">
               <label for="chk123">codigo</label>
             </div>
@@ -118,11 +120,9 @@ export class Database {
 
           <div class="row g-0">
             <div class="col-auto me-2">
-              <input id="chk1234" type="checkbox" class="form-check-inpu" />
+              <input id="chk1234" type="checkbox" class="form-check-input" />
             </div>
-            <div class="col-auto me-2">
-              <i class="bi bi-node-plus"></i>
-            </div>
+            <div class="col-auto pk-fk me-2">FK</div>
             <div class="col text-truncate" title="codigo pessoa da nova tabela">
               <label for="chk1234">codigo pessoa da nova tabela</label>
             </div>
@@ -134,16 +134,15 @@ export class Database {
         </div>
       </div>`;
 
-    document.querySelector('main div#mainCode').insertAdjacentHTML('afterbegin', card);
-    document.querySelector(`#${tableId}`).style.top = `${++total}0px`;
-    document.querySelector(`#${tableId}`).style.left = `${++total}0px`;
-    document.querySelector(`#${tableId}`).style.zIndex = `100${++total}`
-    document.querySelector(`#${tableId} div.card-header`).textContent = tableLabel;
+    document.querySelector('main div#mainCode').insertAdjacentHTML('afterbegin', cardStr);
+    let card = document.querySelector(`#${tableId}`);
+        card.style.top = `${++total}0px`;
+        card.style.left = `${++total}0px`;
+        card.style.zIndex = `100${++total}`
+        card.querySelector(`#card-title`).textContent = tableLabel;
     
-    this.dragElement( document.querySelector(`#${tableId}`) );
-
-    this.setLineFromTo( document.querySelector(`#${tableId}`) );
-    
+    this.dragElement( card );
+    this.setLineFromTo( card );
   } 
 
   dragElement(elmnt) {
@@ -205,7 +204,10 @@ export class Database {
           if(!line){
             line = `
             <div id="line_${element}" from="${from.id}" to="${to.id}" class="line">
-              <div class="line-in">${from.id} vs ${to.id}</div>
+              <div class="line-in">
+                <p>inner join Tipo_de_publico on</p> 
+                <p>Pessoa.Codigo = Tipo_de_publico.Pessoa_codigo</p> 
+              </div>
             </div>
             `;
             container.insertAdjacentHTML('afterbegin', line);
