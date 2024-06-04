@@ -38,6 +38,24 @@ export class Database {
       });
     });
 
+    document.querySelector('#floatSectionMenu').addEventListener('click', this.showHideSection);
+
+  }
+
+  showHideSection(event){   
+
+    const btn = event.target.closest('button');
+    const sec = btn.querySelector('i');
+
+    if(sec.classList.contains('bi-chevron-double-right')){
+        sec.classList.add('bi-chevron-double-left');
+        sec.classList.remove('bi-chevron-double-right');
+        document.querySelector('div#database-grid').style.gridTemplateAreas= `"search header" "section main"`;
+    }else if(sec.classList.contains('bi-chevron-double-left')){
+        sec.classList.add('bi-chevron-double-right');
+        sec.classList.remove('bi-chevron-double-left'); 
+        document.querySelector('div#database-grid').style.gridTemplateAreas= `"header header" "main main"`;
+    }
   }
 
   async datatableGear(event){

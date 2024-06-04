@@ -1,6 +1,6 @@
 import { Fetch } from './Fetch.js';
 import { Modal } from './Modal.js';
-import { Utils } from "/src/modules/Utils.js";
+import { Utils } from "./Utils.js";
 
 export class App {
 
@@ -13,8 +13,18 @@ export class App {
 
     //--> ROUTER
     async init(){
-        let uri = '/src/modules/routes.json';
-        this.routes = await this.fetch.getData(uri);
+        //let uri = '/src/modules/routes.json';
+        //this.routes = await this.fetch.getData(uri);
+        this.routes = [
+            {
+                "name": "#",
+                "path": "/src/modules/login/Login.js"
+            },
+            {
+                "name": "#Wizard",
+                "path": "/src/modules/layout/Layout.js"
+            }
+        ];
         this.callRender(window.location.hash);
         this.events();
     }
@@ -104,7 +114,7 @@ export class App {
     }
 
     getComponentByName(name){
-        debugger;
+        //debugger;
         for(let comp in application.components){
             if(application.components[comp].constructor.name == name){
                 return application.components[comp];

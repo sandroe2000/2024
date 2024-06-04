@@ -28,6 +28,9 @@
 
     </div>
     <div class="pe-2 pt-2">
+      <button id="btnShowHideCode" type="button" class="btn btn-success me-1">
+        <i class="bi bi-lightning"></i> Optimize Query
+      </button>
       <button id="btnShowHideCode" type="button" class="btn btn-light me-4">
         <i class="bi bi-code-slash"></i>
       </button>
@@ -133,6 +136,14 @@
     height: calc(100vh - 125px);
     padding: 0px;
     margin: 0px;
+    --dot-bg: #f8f9fc;
+    --dot-color: #D2D2D2;
+    --dot-size: 1px;
+    --dot-space: 20px;
+    background:
+		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+		var(--dot-color);
   }
 
   .table-card {
