@@ -38,6 +38,18 @@ export class Database {
       });
     });
 
+    document.querySelector('#btnShowHideCode').addEventListener('click', async (event) => {
+      await application.render({
+        path: "/src/modules/database/Phi3.js",
+        target: ".modal",
+        param: {
+          size:"modal-xl",
+          label: "PHI-3"
+        },
+        notCss: true,
+      });
+    });
+
     document.querySelector('#floatSectionMenu').addEventListener('click', this.showHideSection);
 
   }

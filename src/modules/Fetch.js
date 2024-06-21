@@ -21,7 +21,7 @@ export class Fetch {
     }
 
     async setData(url, json) {
-        let uri = `${url}?uuidv4=${this.uuidv4()}&id=${json.codigo}`
+        let uri = `${url}?uuidv4=${this.uuidv4()}&id=${json.codigo}`;
         let method = "PUT";
         if (!json.codigo) {
             delete json.codigo;
@@ -35,6 +35,20 @@ export class Fetch {
         });
         if (response.ok) {
             return response.json();
+        }
+        return false;
+    }
+
+    async postData(url, json) {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: this.headers,
+            body: JSON.stringify(json)
+        });
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.log( JSON.stringify(response) );
         }
         return false;
     }
